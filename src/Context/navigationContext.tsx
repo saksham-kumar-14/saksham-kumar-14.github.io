@@ -3,16 +3,12 @@ import React, { createContext, useContext, useState, ReactNode, useEffect } from
 const NavigationContext = createContext<NavigationContextType | null>(null);
 
 interface NavigationContextType{
-    darkMode: boolean
-    changeDarkMode: Function
+    darkMode: boolean;
+    changeDarkMode: (mode: boolean) => void;
 }
 
 interface NavProviderProps{
     children: ReactNode
-}
-
-export function useNav(){
-    return useContext(NavigationContext)
 }
 
 export const NavProvider: React.FC<NavProviderProps> = (props) => {
@@ -37,14 +33,17 @@ export const NavProvider: React.FC<NavProviderProps> = (props) => {
         else document.body.className = 'light'
     }
 
-    const value = {
-        darkMode,
-        changeDarkMode,
-    }
-
     return(
-        <NavigationContext.Provider value={value}>
+        <NavigationContext.Provider value={{ darkMode, changeDarkMode }}>
             {props.children}
         </NavigationContext.Provider>
     )
+}
+
+export function useNav() {
+    const context = useContext(NavigationContext);
+    if (!context) {
+        throw new Error("useNav must be used within a NavProvider");
+    }
+    return context;
 }
