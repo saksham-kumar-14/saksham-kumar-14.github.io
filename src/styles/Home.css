@@ -1,0 +1,11 @@
+.heading-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h1, h2{
+    padding-right: 15px;
+    border-right: solid orange 1rem;
+}

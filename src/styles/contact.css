@@ -1,0 +1,16 @@
+.msg-form{
+    display: flex;
+    flex-direction: column;
+    padding-left: 15rem;
+    padding-right: 15rem;
+    margin: 15px;
+}
+.msg-form input, .msg-form textarea{
+    margin: 8px;
+    padding: 8px;
+}
+
+.contact__heading{
+    font-size: 30px;
+    margin-left: 10rem;
+}

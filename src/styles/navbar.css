@@ -1,0 +1,26 @@
+.navlist-container{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 12px 20px;
+}
+.navlist-container div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navlist-container a{
+    cursor: pointer;
+}
+
+.mode-container{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 16px 100px;
+}
+
+.__contact{
+    display: flex;
+    flex-direction: column;
+    padding: 24px 16px;
+}

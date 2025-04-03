@@ -1,0 +1,138 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input, textarea{
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+}
+body.light input:focus, body.light textarea:focus{
+  border: solid black 1px;
+}
+body.dark input:focus, body.dark textarea:focus{
+  border: solid white 1px;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #242424;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+  background-color: #363535;
+}
+
+/* Default Light Mode */
+body.light {
+  background-color: white;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+/* Dark Mode */
+body.dark {
+  background-color: #121212;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+body.light textarea, body.light input{
+  background-color: antiquewhite;
+  color: #121212;
+}
+
+body.dark textarea, body.dark input{
+  background-color: #242424;
+  color: white;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+@keyframes transitionIn{
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to{
+    opacity: 1;
+    transform: translatex(0);
+  }
+}
+
+*{
+  animation: transitionIn 1.75s;
+}
+
+.underline-button{
+  @apply relative p-4
+}
+
+.underline-button::after{
+  @apply duration-300 content-[''] bg-[#11e3fb] h-[3px] w-[10%] absolute left-0 bottom-[5px] rounded-xl transition-[width] delay-300
+}
+.underline-button:hover::after{
+  @apply w-[100%]
+}
+
+*{
+  box-sizing: border-box;
+  font-family: "Afacad Flux", sans-serif;
+}
+
+:root {
+  --background: rgba(1,1,27,1);
+  --foreground: #ededed;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}

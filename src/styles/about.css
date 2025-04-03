@@ -1,0 +1,33 @@
+.about-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.about-subcontainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-container img{
+    border-radius: 3rem;
+}
+
+.connect-btns{
+    width: 500px;
+}
+
+.connect-container{
+    font-size: 30px;
+}
+
+body.dark .connect-container p{
+    color: rgb(184, 123, 9);
+}
+body.light .connect-container p{
+    color: orange;
+}
+
+.about-info div{
+    padding: 12px 6px;
+}
