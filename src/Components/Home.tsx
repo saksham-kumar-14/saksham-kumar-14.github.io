@@ -3,14 +3,14 @@ import '../styles/Home.css'
 
 const Home: React.FC = () => {
 
-    const headingList = [`Web Development & DevOps`, `DSA & CP`, `AI & ML`, `Nerdy Problems & Challenges`]
+    const headingList = [`Web Development & DevOps`, `Low Level`, `DSA`]
     const [heading, setHeading] = useState<number>(0);
     const [headingIdx, setHeadingIdx] = useState<number>(0);
     const [writing, setWriting] = useState<Boolean>(true);
 
     const subHeading = `Hello, I'm Saksham.`;
     const [subHeadingIdx, setSubHeadingIdx] = useState<number>(0);
-    const [subHeadingWriting, setSubHeadingWriting] = useState<Boolean>(true);
+    const [subHeadCompleted, setSubHeadCompleted] = useState<Boolean>(false);
 
     useEffect(()=>{
         const displayHeading = () => {
@@ -29,10 +29,8 @@ const Home: React.FC = () => {
                 setHeadingIdx(headingIdx - 1);
             }
 
-            if(subHeadingWriting && subHeadingIdx >= subHeading.length - 1) setSubHeadingWriting(false);
-            else if(!subHeadingWriting && subHeadingIdx <= 0) setSubHeadingWriting(true);
-            else if(subHeadingWriting) setSubHeadingIdx(subHeadingIdx + 1);
-            else setSubHeadingIdx(subHeadingIdx - 1);
+            if(!subHeadCompleted && subHeadingIdx >= subHeading.length - 1) setSubHeadCompleted(true);
+            if(!subHeadCompleted) setSubHeadingIdx(subHeadingIdx + 1);
         }
         setTimeout(displayHeading, 100);
     })
