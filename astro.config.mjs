@@ -8,5 +8,4 @@ export default defineConfig({
   },
   integrations: [Icons()],
   site: 'https://saksham-kumar-14.github.io',
-  base: '/',
 });
