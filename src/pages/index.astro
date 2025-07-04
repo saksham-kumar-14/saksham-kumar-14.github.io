@@ -1,0 +1,28 @@
+---
+import "../styles/global.css";
+import Heading from "../components/utils/heading.astro";
+import Footer from "../layouts/footer.astro";
+import About from "../components/about.astro";
+import Blog from "../components/blog.astro";
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Saksham's Blog</title>
+    </head>
+
+    <body class="min-h-screen flex flex-col">
+        <Heading />
+
+        <main class="grid grid-cols-2 p-4 flex-grow">
+            <About />
+            <Blog />
+        </main>
+
+        <Footer class="mt-auto" />
+    </body>
+</html>

@@ -1,0 +1,22 @@
+---
+import socials from "../../data/socials.json";
+import { Icon } from "astro-icon/components";
+---
+
+<div class="flex items-center">
+    {
+        Object.values(socials).map(({ link, img }) => (
+            <a
+                class="mx-[1rem] text-[#fff]"
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <Icon
+                    name={img}
+                    class="w-[2rem] h-[2rem] hover:bg-[#fe640b] hover:text-[#000] transition-all p-1"
+                />
+            </a>
+        ))
+    }
+</div>

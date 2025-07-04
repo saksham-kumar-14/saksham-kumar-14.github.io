@@ -1,0 +1,22 @@
+{
+  "github": {
+    "link": "https://github.com/saksham-kumar-14",
+    "img": "lucide:github"
+  },
+  "twitter": {
+    "link": "https://x.com/sakshm_kumar",
+    "img": "lucide:twitter"
+  },
+  "linkedin": {
+    "link": "https://www.linkedin.com/in/saksham0kumar/",
+    "img": "lucide:linkedin"
+  },
+  "email": {
+    "link": "mailto:sakshamkumar1415@gmail.com?subject=Hello&body=Hi",
+    "img": "lucide:mail"
+  },
+  "codeforces": {
+    "link": "https://codeforces.com/profile/antidote10",
+    "img": "simple-icons:codeforces"
+  }
+}

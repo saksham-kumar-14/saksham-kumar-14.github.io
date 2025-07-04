@@ -1,0 +1,21 @@
+---
+const heading = "Hi, I'm Saksham";
+---
+
+<h1 class="flex items-center justify-center">
+    <span id="dynamic-heading">{heading.slice(0, 0)}</span>
+    <span class="inline-block h-[2.5rem] w-[1rem] bg-[#fe640b] mx-[0.25rem]"
+    ></span>
+</h1>
+
+<script is:inline>
+    const heading = "Hi, I'm Saksham";
+
+    let i = 0;
+    const headingEl = document.getElementById("dynamic-heading");
+
+    setInterval(() => {
+        i = i != heading.length ? i + 1 : i;
+        headingEl.textContent = heading.slice(0, i);
+    }, 100);
+</script>
