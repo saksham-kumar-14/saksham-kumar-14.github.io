@@ -7,14 +7,13 @@ import { Icon } from "astro-icon/components";
     {
         Object.values(socials).map(({ link, img }) => (
             <a
-                class="mx-[1rem] text-[#fff]"
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
             >
                 <Icon
                     name={img}
-                    class="w-[2rem] h-[2rem] hover:bg-[#fe640b] hover:text-[#000] transition-all p-1"
+                    class="w-[2rem] h-[2rem]"
                 />
             </a>
         ))

@@ -9,10 +9,14 @@ const heading = "Hi, I'm Saksham";
 </h1>
 
 <script is:inline>
-    const heading = "Hi, I'm Saksham";
+    const heading = "Hi, I'm Saksham. ";
 
     let i = 0;
     const headingEl = document.getElementById("dynamic-heading");
+
+    headingEl.addEventListener("click", () => {
+      i %= heading.length;
+    });
 
     setInterval(() => {
         i = i != heading.length ? i + 1 : i;

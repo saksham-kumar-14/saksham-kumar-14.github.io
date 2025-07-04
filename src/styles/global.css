@@ -1,7 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrainsmono.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrainsmonoitalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrainsmonosemibold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
 
 body {
   margin: 0;
@@ -9,4 +29,45 @@ body {
   font-family: 'JetBrains Mono', monospace;
   background-color: #1e1e2e;
   color: #cdd6f4;
+}
+h1 {
+  font-size: 1.75rem;
+}
+@media (min-width: 640px) {
+  h1 {
+    font-size: 2.25rem;
+  }
+}
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+@media (min-width: 640px) {
+  h2 {
+    font-size: 1.75rem;
+  }
+}
+@media (min-width: 1024px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+a {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0.25rem;
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+a:hover {
+  background-color: #fe640b;
+  color: #000000;
 }
