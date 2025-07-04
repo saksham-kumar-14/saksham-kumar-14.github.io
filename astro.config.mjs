@@ -7,4 +7,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [Icons()],
+  site: 'https://saksham-kumar-14.github.io',
+  base: '/',
 });
