@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import "../../styles/global.css";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<head>
+    <title>
+        Blog | {post.data.title}
+    </title>
+</head>
+
+<article class="w-[70vw] mx-auto py-8">
+    <div>
+        <a href="/">Back</a>
+    </div>
+
+    <div class="flex items-end">
+        <h1 class="text-[#fe640b]"># {post.data.title}</h1>
+        <p class="mx-8">{post.data.date.toDateString()}</p>
+    </div>
+
+  {post.data.tags && (
+      <ul class="flex items-center mx-8">
+        {post.data.tags.map(tag => (
+          <li class="mx-6 my-8 px-4 py-2 rounded-full bg-orange-400">{tag}</li>
+        ))}
+      </ul>
+    )}
+
+  <p>{post.data.description}</p>
+  <div class="prose prose-orange dark:prose-invert max-w-none">
+    <Content />
+  </div>
+
+
+</article>
