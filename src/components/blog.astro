@@ -10,9 +10,9 @@ const posts = (await getCollection("blog"))
     <h2 class="text-[#e64553] font-semibold">My blogs</h2>
     <span class="text-gray-300">I mostly rant here.</span>
 
-    <ul>
+    <ul class="overflow-y-scroll h-[60vh]">
       {posts.map((post) => (
-        <li>
+        <li class="my-6">
           <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
           <small> — {post.data.date.toLocaleDateString()}</small>
           <!-- <p>{post.data.description}</p> -->

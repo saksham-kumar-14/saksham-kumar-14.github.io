@@ -2,7 +2,7 @@
 title: 'Emulation Programming'
 date: 2025-08-12
 description: 'About emulation programmming and emulators in general'
-tags: ['intro', 'astro']
+tags: ['emulators', 'C']
 ---
 
 Yo! I have been reading about emulators for quite while now. I decided to write this blog to share some stuff I have learnt and also these will be notes for me as well. I will continue updating this as my understanding grows.
