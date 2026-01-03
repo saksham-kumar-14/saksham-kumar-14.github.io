@@ -2,20 +2,20 @@
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blog"))
-    .filter(post => !post.data.draft)
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <div class="flex flex-col items-center px-2 py-2 gap-1">
-    <h2 class="text-[#e64553] font-semibold">My blogs</h2>
-    <span class="text-gray-300">I mostly rant here.</span>
+    <h2 class="text-[#e64553] font-semibold">My Notes</h2>
+    <span class="text-gray-300">...</span>
 
     <ul class="overflow-y-scroll h-[60vh]">
       {posts.map((post) => (
         <li class="my-6">
-          <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
           <small> — {post.data.date.toLocaleDateString()}</small>
-          <!-- <p>{post.data.description}</p> -->
+          <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+          <div></div>
+          <small> {post.data.description}</small>
         </li>
       ))}
     </ul>

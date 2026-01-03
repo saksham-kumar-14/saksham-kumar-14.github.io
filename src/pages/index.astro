@@ -4,6 +4,7 @@ import Heading from "../components/utils/heading.astro";
 import Footer from "../layouts/footer.astro";
 import About from "../components/about.astro";
 import Blog from "../components/blog.astro";
+import Bookshelf from "../components/bookshelf.astro";
 ---
 
 <html lang="en">
@@ -19,8 +20,11 @@ import Blog from "../components/blog.astro";
         <Heading />
 
         <main class="md:grid md:grid-cols-2 p-4 flex-grow">
-            <About />
-            <Blog />
+            <div>
+                <About/>
+                <Bookshelf />
+            </div>
+            <Blog/>
         </main>
 
         <Footer class="mt-auto" />

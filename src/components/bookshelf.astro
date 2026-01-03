@@ -1,0 +1,30 @@
+---
+import books from "../data/bookshelf.json";
+---
+<div class="flex flex-col px-2 py-2 gap-1">
+  <h2 class="text-[#e64553] font-semibold">Bookshelf</h2>
+  <span>{books.length} books</span>
+  <ul class="overflow-y-scroll h-[30vh]">
+    {books.map((book) => (
+      <li class="my-6">
+        <h3 class="font-semibold">
+            {book.title}
+            {book.link && (
+              <a
+                href={book.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-blue-600 hover:underline text-sm"
+              >
+                [link]
+              </a>
+            )}
+        </h3>
+        <p class="text-sm text-gray-700">{book.author}</p>
+        {book.notes && (
+          <p class="text-xs text-gray-600 mt-1">{book.notes}</p>
+        )}
+      </li>
+    ))}
+  </ul>
+</div>
