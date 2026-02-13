@@ -22,4 +22,6 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex, rehypeSlug, rehypeAutolinkHeadings],
   },
+
+  output: 'static',
 });
