@@ -4,6 +4,7 @@ import "../../styles/global.css";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
+
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
@@ -14,34 +15,47 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<head>
-    <title>
-        Blog | {post.data.title}
-    </title>
-</head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Blog | {post.data.title}</title>
+  </head>
 
-<article class="w-[70vw] mx-auto py-8">
-    <div>
-        <a href="/">Back</a>
-    </div>
+  <body>
+    <article class="w-[70vw] mx-auto py-8">
 
-    <div class="flex items-end">
-        <h1 class="text-[#fe640b]"># {post.data.title}</h1>
-        <p class="mx-8">{post.data.date.toDateString()}</p>
-    </div>
+      <div>
+        <a href="/" class="text-orange-500 underline">← Back</a>
+      </div>
 
-  {post.data.tags && (
-      <ul class="flex items-center mx-8">
-        {post.data.tags.map(tag => (
-          <li class="mx-6 my-8 px-4 py-2 rounded-full bg-orange-400">{tag}</li>
-        ))}
-      </ul>
-    )}
+      <div class="flex items-end gap-6 mt-4">
+        <h1 class="text-4xl font-bold text-[#fe640b]">
+          # {post.data.title}
+        </h1>
+        <p class="text-sm opacity-70">
+          {post.data.date.toDateString()}
+        </p>
+      </div>
 
-  <p>{post.data.description}</p>
-  <div class="prose prose-orange dark:prose-invert max-w-none">
-    <Content />
-  </div>
+      {post.data.tags && (
+        <ul class="flex flex-wrap gap-3 mt-4">
+          {post.data.tags.map((tag) => (
+            <li class="px-3 py-1 text-sm rounded-full bg-orange-400 text-white">
+              {tag}
+            </li>
+          ))}
+        </ul>
+      )}
 
+      {post.data.description && (
+        <p class="mt-4 text-lg opacity-80">{post.data.description}</p>
+      )}
 
-</article>
+      <div class="prose prose-orange dark:prose-invert max-w-none mt-8">
+        <Content />
+      </div>
+
+    </article>
+  </body>
+</html>

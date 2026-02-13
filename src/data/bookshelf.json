@@ -1,5 +1,13 @@
 [
   {
+    "title": "Database Internals",
+    "author": "Alex Petrov"
+  },
+  {
+    "title" : "Beej's Guide to Network Programming",
+    "author" : "Brain Hall"
+  },
+  {
     "title": "The Hitchhiker's Guide to the Galaxy",
     "author": "Douglas Adams"
   }

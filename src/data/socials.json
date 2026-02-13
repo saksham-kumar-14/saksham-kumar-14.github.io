@@ -14,9 +14,5 @@
   "email": {
     "link": "mailto:sakshamkumar1415@gmail.com?subject=Hello&body=Hi",
     "img": "lucide:mail"
-  },
-  "codeforces": {
-    "link": "https://codeforces.com/profile/antidote10",
-    "img": "simple-icons:codeforces"
   }
 }
