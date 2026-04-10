@@ -1,7 +1,7 @@
 ---
-title: 'Task Scheuler Manager DSL'
+title: 'Task Scheduler Manager DSL'
 date: 2026-04-10
-description: 'About emulation programmming and emulators in general'
+description: 'DSL User Manual'
 tags: ['Domain Specific Language', 'Task Scheduling', 'Ocaml']
 ---
 
