@@ -1,6 +1,6 @@
 ---
 title: 'Task Scheduler Manager DSL'
-date: 2026-04-10
+date: 2026-04-13
 description: 'DSL User Manual'
 tags: ['Domain Specific Language', 'Task Scheduling', 'Ocaml']
 ---
@@ -21,7 +21,7 @@ set_memory(256.0);
 </pre>
 
 - `set_cores(n)` : Sets the number of processing cores available. Must be an integer ≥ 1.
-- `set_memory(n)` : Sets the total system memory. Must be a non-negative float.
+- `set_memory(n)` : Sets the total system memory. Must be a non-negative float. If omitted, defaults to `inf` (infinity).
 
 ### 2. Define Tasks
 
@@ -38,32 +38,35 @@ set_memory(256.0);
   - <pre>
     task identifier("Name", duration, arrival, memory, preemptive, [dependencies], priority);
     </pre>
-
-for example:
-<pre>
-task myTask("My Task Name", 15.0, 0.0, 32.0, false, [], 50.0);
-</pre>
+  - Example: `task myTask("My Task Name", 15.0, 0.0, 32.0, false, [], 50.0);`
 
 - *Method B (Field Assignment)*
-<pre>
-task identifier;
-identifier.name = "My Task Name";
-identifier.duration = 15.0;
-identifier.arrival = 0.0;
-identifier.memory = 32.0;
-identifier.preemptive = true;
-identifier.dependencies = [myTask2, myTask3];
-identifier.priority = 67.0;
-</pre>
+  - <pre>
+    task identifier;
+    identifier.name = "My Task Name";
+    identifier.duration = 15.0;
+    identifier.memory = 32.0;
+    // ...other fields
+    </pre>
 
-### 3. Variables & If/Else Statements
+- *Method C (Copy / Clone)*
+  - You can perform a deep copy of an existing task. You may optionally provide a new string name to override the internal display name.
+  - <pre>
+    task cloneA = myTask; // Exact copy
+    task cloneB = myTask("Renamed Clone"); // Copy with new name
+    </pre>
+
+### 3. Variables, Math & If/Else Statements
 - Variables are dynamically typed and can hold Integers, Floats, Booleans, Strings, Tasks, or Lists.
 - Lists and Task Lists can be accessed using zero-based integer indexing (e.g., `ml_pipeline[0]`). Floating-point indices are strictly prohibited.
-- Standard arithmetic (`+`, `-`, `*`, `/`) and logical (`&&`, `||`, `!`, `==`, `<`, `>`, etc.) operators are fully supported.
+- **Math Operators:** Standard arithmetic (`+`, `-`, `*`, `/`) and logical (`&&`, `||`, `!`, `==`, `<`, `>`, etc.) operators are fully supported.
+- **Math Built-ins:** - `max(a, b)`: Returns the maximum of two numbers (or lexicographically highest string).
+  - `min(a, b)`: Returns the minimum of two numbers (or lexicographically lowest string).
+  - `inf`: Represents a floating-point infinity value.
 
 *If/Else Statements*
 <pre>
-if(myTask.memory >= 100.0){
+if(myTask.memory >= max(100.0, system_threshold)){
     print("High Memory Task");
 }else if(myTask.memory >= 50.0){
     print("Medium Memory Task");
@@ -116,42 +119,35 @@ heuristic smart_balance(t1, t2) {
 }
 </pre>
 
-### 7. Simulation & Report
+### 7. Simulation & Reporting
 
-Once your tasks are defined, you can run them through custom or built-in heuristics.
+Before execution, the evaluator runs a **strict validation pass** on your task graph. The simulation will halt and throw an error if it detects:
+1. Duplicate task names within the pool.
+2. A single task requesting more memory than `set_memory()` allows.
+3. Undeclared dependencies.
+4. **Cyclic Dependencies (Deadlocks):** The system uses Kahn's Algorithm and DFS to trace and report the exact cycle path preventing execution.
 
 *Built-in Heuristics:*
-- `FCFS`: First Come First Serve
-- `SJF`: Shortest Job First
+- `FCFS`: First Come First Serve (Tie-breaks via lexicographical task name)
+- `SJF`: Shortest Job First (Tie-breaks via arrival time)
 - `ROUND_ROBIN(quantum)`: Classic Round Robin time-sliced execution
 - `MAX_PRIORITY` / `MIN_PRIORITY`: Priority-based execution
 
 *Generating a Full Report*
-- The `report()` command runs the simulation and outputs a comprehensive schedule trace alongside all calculated metrics.
+- The `report()` command runs the simulation and outputs a comprehensive schedule trace to the console alongside all calculated metrics.
+- **Visualizer Dashboard:** Running a report automatically emits a high-fidelity `report.html` file containing interactive Gantt charts, algorithm comparison bars, and full metric tables.
 
 <pre>
 report(ml_pipeline, [FCFS, ROUND_ROBIN(10.0), smart_balance]);
 </pre>
 
 *Generating Specific Metrics*
-If you only want specific performance numbers instead of the full timeline, you can query individual metrics. You can get the following specific metrics:
+If you only want specific performance numbers instead of the full timeline, you can query individual metrics:
 
 <pre>
 makespan(tasks, [FCFS, SJF]);
-</pre>
-
-<pre>
 average_waiting(tasks, [ROUND_ROBIN(10.0), MAX_PRIORITY]);
-</pre>
-
-<pre>
 average_flow(tasks, [FCFS, smart_balance]);
-</pre>
-
-<pre>
 utilization(tasks, [FCFS, SJF]);
-</pre>
-
-<pre>
 throughput(tasks, [FCFS, ROUND_ROBIN(10.0)]);
 </pre>
