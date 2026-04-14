@@ -41,6 +41,7 @@ set_memory(256.0);
   - Example: `task myTask("My Task Name", 15.0, 0.0, 32.0, false, [], 50.0);`
 
 - *Method B (Field Assignment)*
+  - Start with an empty declaration and dynamically assign fields.
   - <pre>
     task identifier;
     identifier.name = "My Task Name";
@@ -49,16 +50,16 @@ set_memory(256.0);
     // ...other fields
     </pre>
 
-- *Method C (Copy / Clone)*
-  - You can perform a deep copy of an existing task. You may optionally provide a new string name to override the internal display name.
+- *Method C (Copy Constructor)*
+  - You can duplicate an existing task. This copies all scalar fields and performs a deep copy of the dependencies array. You can optionally provide an override name using `as`.
   - <pre>
-    task cloneA = myTask; // Exact copy
-    task cloneB = myTask("Renamed Clone"); // Copy with new name
+    task cloneTask = myTask;
+    task namedClone = myTask as "New Copied Task Name";
     </pre>
 
 ### 3. Variables, Math & If/Else Statements
 - Variables are dynamically typed and can hold Integers, Floats, Booleans, Strings, Tasks, or Lists.
-- Lists and Task Lists can be accessed using zero-based integer indexing (e.g., `ml_pipeline[0]`). Floating-point indices are strictly prohibited.
+- Lists and Task Lists can be accessed using zero-based integer indexing (e.g., `ml_pipeline[0]`). Floating-point indices are strictly prohibited. You can dynamically reassign list elements via index (e.g., `ml_pipeline[0] = cloneTask;`).
 - **Math Operators:** Standard arithmetic (`+`, `-`, `*`, `/`) and logical (`&&`, `||`, `!`, `==`, `<`, `>`, etc.) operators are fully supported.
 - **Math Built-ins:** - `max(a, b)`: Returns the maximum of two numbers (or lexicographically highest string).
   - `min(a, b)`: Returns the minimum of two numbers (or lexicographically lowest string).
@@ -79,9 +80,9 @@ _*Note: You can chain as many `else if` statements as needed._
 ### 4. Loops
 The DSL offers two specific loop structures:
 
-1. *Range Loop:* Iterates over numbers `loop index(start, stop, step)`.
+1. *Range Loop:* Iterates over numbers using `loop (start, stop, step) as index`.
 <pre>
-loop i(3, 0, -1) {
+loop (3, 0, -1) as i {
     print(i); // Prints 3, 2, 1
 }
 </pre>
