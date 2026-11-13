@@ -71,3 +71,166 @@ a:hover {
   background-color: #fe640b;
   color: #000000;
 }
+
+/* ---- Blog post page ---- */
+.blog-post .back-link {
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+.blog-post .back-link:hover {
+  background: transparent;
+  color: #ffffff;
+}
+.post-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+}
+@media (min-width: 640px) {
+  .post-title {
+    font-size: 2.5rem;
+  }
+}
+.post-meta {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+.post-desc {
+  margin-top: 1rem;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1rem;
+  color: #ffffff;
+}
+.tag {
+  padding: 0.15rem 0.7rem;
+  font-size: 0.78rem;
+  color: #ffffff;
+  background: transparent;
+  border: 1px solid #45475a;
+  border-radius: 999px;
+}
+.toc {
+  margin-bottom: 2.5rem;
+  padding: 1rem 1.25rem;
+  background: #181825;
+  border: 1px solid #313244;
+  border-radius: 0.6rem;
+  font-size: 0.9rem;
+}
+.toc-title {
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.toc ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  list-style: decimal;
+}
+.toc a {
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  text-decoration: none;
+}
+.toc a:hover {
+  background: transparent;
+  color: #ffffff;
+}
+html {
+  scroll-behavior: smooth;
+}
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* code blocks: line numbers in boxes */
+.prose pre.astro-code code {
+  display: block;
+  counter-reset: ln;
+}
+.prose pre.astro-code .line {
+  display: inline-block;
+  min-width: 100%;
+  padding-left: 0;
+}
+.prose pre.astro-code .line::before {
+  counter-increment: ln;
+  content: counter(ln);
+  display: inline-block;
+  box-sizing: content-box;
+  width: 2.2rem;
+  margin: 0 1.5rem 0 0;
+  padding: 0 0.4rem;
+  text-align: center;
+  color: #5c6370;
+  background: #3a3a3a66;
+  user-select: none;
+}
+.prose pre.astro-code {
+  overflow-x: auto;
+}
+
+.blog-post, .blog-post .prose, .blog-post .prose :where(p,li,td,th,strong,em,h1,h2,h3,h4,blockquote,code):not(pre code) {
+  color: #ffffff;
+}
+
+/* blog: every text element white (code token colors excepted) */
+.blog-post :where(h1, h2, h3, h4, h5, h6, a, p, li, ol, ul, strong, b, em, i, time, span, small, td, th, figcaption, blockquote, summary, label):not(pre *) {
+  color: #ffffff;
+}
+.blog-post h1 a, .blog-post h2 a, .blog-post h3 a, .blog-post h4 a,
+.blog-post a:hover, .blog-post a:visited {
+  color: #ffffff;
+  background-color: transparent;
+}
+.blog-post li::marker {
+  color: #ffffff;
+}
+.blog-post .prose :where(code):not(pre code) {
+  color: #ffffff;
+}
+
+/* blog: orange background on hover only behind the text of links/heading links */
+.blog-post :is(h1, h2, h3, h4, h5, h6):hover {
+  background: transparent !important;
+}
+.blog-post :is(h1, h2, h3, h4, h5, h6) a {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+.blog-post a:hover,
+.blog-post a:focus {
+  background: #fe640b !important;
+  color: #ffffff !important;
+}
+
+/* code blocks: line-number column flush with the left border */
+.prose pre.astro-code {
+  padding-left: 0 !important;
+  padding-inline-start: 0 !important;
+  text-indent: 0;
+}
+.prose pre.astro-code code {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.prose pre.astro-code .line {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+.prose pre.astro-code .line::before {
+  margin-left: 0 !important;
+}

@@ -7,7 +7,6 @@ const posts = (await getCollection("blog"))
 
 <div class="flex flex-col items-center px-2 py-2 gap-1">
     <h2 class="text-[#e64553] font-semibold">My Notes</h2>
-    <span class="text-gray-300">...</span>
 
     <ul class="overflow-y-scroll h-[60vh]">
       {posts.map((post) => (

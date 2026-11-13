@@ -30,7 +30,7 @@ Yo! I have been reading about emulators for quite while now. I decided to write 
 
 ### C trick in emulators to access the same register data in multiple ways
 
-<pre>
+```
 typedef union
 {
     UINT32 w;   /* Access it as a 32-bit value (maybe for full register set) */
@@ -41,7 +41,7 @@ typedef union
         UINT16 pad;  /* Padding for little-endian alignment */
     } b;       /* Access as two bytes */
 } i8080Reg;
-</pre>
+```
 
 - Using this registers can be accessed as:
   1. 32 - bit value
@@ -53,7 +53,7 @@ typedef union
 
 Given is a basic instruction operation performed during emulation.
 
-<pre>
+```
 instruction (operands){
     get_operands;
     perform_calculations;
@@ -61,7 +61,7 @@ instruction (operands){
     update_time;
     return to the main loop / fetch next opcode;
 }
-</pre>
+```
 
 #### Flags
 
@@ -111,7 +111,8 @@ instruction (operands){
   2. cpu_step - executes one CPU instruction
 
 - The header file for the following can look something like:
-<pre>
+
+```
 #ifndef CPU6502_H
 #define CPU6502_H
 #include <stdint.h>
@@ -154,7 +155,7 @@ void cpu_step(CPU6502 *cpu, uint8_t (*read)(uint16_t), void(\*write)(uint16_t, u
 
 #endif
 
-</pre>
+```
 
 ---
 
