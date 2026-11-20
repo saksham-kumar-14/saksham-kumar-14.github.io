@@ -181,24 +181,28 @@ html {
   overflow-x: auto;
 }
 
-.blog-post, .blog-post .prose, .blog-post .prose :where(p,li,td,th,strong,em,h1,h2,h3,h4,blockquote,code):not(pre code) {
+/* blog: headings bright white, body text dimmed so paragraphs stand apart */
+.blog-post .prose :where(p, li, td, th, em, figcaption, blockquote):not(pre *) {
+  color: #a6adc8;
+}
+.blog-post .prose :where(h1, h2, h3, h4, h5, h6, h1 a, h2 a, h3 a, h4 a):not(pre *) {
   color: #ffffff;
 }
-
-/* blog: every text element white (code token colors excepted) */
-.blog-post :where(h1, h2, h3, h4, h5, h6, a, p, li, ol, ul, strong, b, em, i, time, span, small, td, th, figcaption, blockquote, summary, label):not(pre *) {
-  color: #ffffff;
-}
-.blog-post h1 a, .blog-post h2 a, .blog-post h3 a, .blog-post h4 a,
-.blog-post a:hover, .blog-post a:visited {
-  color: #ffffff;
-  background-color: transparent;
-}
-.blog-post li::marker {
-  color: #ffffff;
+.blog-post .prose :where(strong, b):not(pre *) {
+  color: #cdd6f4;
 }
 .blog-post .prose :where(code):not(pre code) {
   color: #ffffff;
+}
+.blog-post .prose a:not(:is(h1, h2, h3, h4, h5, h6) a) {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: #fe640b;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.blog-post li::marker {
+  color: #7f849c;
 }
 
 /* blog: orange background on hover only behind the text of links/heading links */
@@ -233,4 +237,11 @@ html {
 }
 .prose pre.astro-code .line::before {
   margin-left: 0 !important;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

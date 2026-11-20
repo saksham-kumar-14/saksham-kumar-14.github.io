@@ -314,4 +314,4 @@ $$
 \hat{A}_{i,t} = \widetilde{r}_i = \frac{r_i - \operatorname{mean}(\mathbf{r})}{\operatorname{std}(\mathbf{r})},
 $$
 
-and then optimizes the policy by maximizing the objective defined in equation (3).
+and then optimizes the policy by maximizing the objective defined in the reward function equation.
