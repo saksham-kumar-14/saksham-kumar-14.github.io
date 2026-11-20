@@ -259,3 +259,59 @@ I found [this](https://www.youtube.com/watch?v=8jtAzxUwDj0) very helpful video f
 ## Group Relative Policy Optimization (GRPO)
 
 GRPO *eliminates* the need of having a value function!
+
+Instead of a value function, it uses the average reward of multiple sampled outputs, produced in response to the same question as baseline. 
+
+For each question $q$, GRPO samples a group of outputs $\{o_1, o_2, \dots, o_G\}$ from the old policy $\pi_{\theta_{old}}$ and then optimizes the policy model by maximizing the following objective:
+
+$$
+\mathcal{J}_{GRPO}(\theta) = \mathbb{E}_{\left[q \sim P(Q),\, \{o_i\}_{i=1}^{G} \sim \pi_{\theta_{old}}(O|q)\right]}
+\frac{1}{G}\sum_{i=1}^{G}\frac{1}{|o_i|}\sum_{t=1}^{|o_i|}
+\left\{
+\min\left[
+\frac{\pi_\theta(o_{i,t}\mid q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t}\mid q, o_{i,<t})}\hat{A}_{i,t},\;
+\operatorname{clip}\left(
+\frac{\pi_\theta(o_{i,t}\mid q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t}\mid q, o_{i,<t})},\,
+1-\varepsilon,\, 1+\varepsilon
+\right)\hat{A}_{i,t}
+\right]
+- \beta\,\mathbb{D}_{KL}\left[\pi_\theta \,\|\, \pi_{ref}\right]
+\right\},
+$$
+
+where $\varepsilon$ and $\beta$ are hyperparameters.
+
+Also note that, instead of adding KL penalty in the reward, GRPO regularizes by directly adding the KL divergence between the trained policy and the reference policy to the loss, avoiding complicating the calculation of Advantage
+
+**Algorithm: Iterative Group Relative Policy Optimization**
+
+```text
+Input: initial policy model π_θinit; reward models r_φ; task prompts D;
+       hyperparameters ε, β, μ
+
+policy model π_θ ← π_θinit
+for iteration = 1, …, I do
+    reference model π_ref ← π_θ
+    for step = 1, …, M do
+        Sample a batch D_b from D
+        Update the old policy model π_θold ← π_θ
+        Sample G outputs {o_i}, i=1..G ~ π_θold(· | q) for each question q ∈ D_b
+        Compute rewards {r_i}, i=1..G for each sampled output o_i by running r_φ
+        Compute Â_{i,t} for the t-th token of o_i through group relative
+        advantage estimation
+        for GRPO iteration = 1, …, μ do
+            Update the policy model π_θ by maximizing the GRPO objective
+            (Equation 21)
+    Update r_φ through continuous training using a replay mechanism
+
+Output: π_θ
+```
+
+
+Outcome supervision provides the normalized reward at the end of each output $o_i$ and sets the advantages $\hat{A}_{i,t}$ of all tokens in the output as the normalized reward, i.e.,
+
+$$
+\hat{A}_{i,t} = \widetilde{r}_i = \frac{r_i - \operatorname{mean}(\mathbf{r})}{\operatorname{std}(\mathbf{r})},
+$$
+
+and then optimizes the policy by maximizing the objective defined in equation (3).
